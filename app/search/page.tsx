@@ -11,7 +11,7 @@ const SearchPage = async ({ searchParams }: Props) => {
   return (
     <div>
       <h1 className="headerTitle">Search Results For: {searchParams?.term}</h1>
-      <NewsList articles={news.articles} />
+      <NewsList articles={news?.articles} />
     </div>
   );
 };
