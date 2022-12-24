@@ -1,6 +1,5 @@
 import React from "react";
 import fetchNews from "../lib/fetchNews";
-import response from "../response.json";
 
 import NewsList from "./NewsList";
 // import NewsList from "./NewsList";
