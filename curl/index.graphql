@@ -8,17 +8,23 @@ type ArticlesEntry {
   url: String
   urlToImage: String
 }
+
 type Root {
   articles: [ArticlesEntry]
   status: String
   totalResults: Int
 }
+
 type Source {
   id: String
   name: String
 }
 
 type Query {
-  myQuery(apiKey: String, q: String, sortBy: String, language: String): Root
-    @rest(endpoint: "https://newsapi.org/v2/everything")
+  myQuery(
+    apiKey: String
+    category: String
+    language: String
+    pageSize: String
+  ): Root @rest(endpoint: "https://newsapi.org/v2/top-headlines")
 }

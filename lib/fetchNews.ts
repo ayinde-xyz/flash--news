@@ -12,7 +12,7 @@ const fetchNews = async (
         apiKey: $apiKey
         language: "en"
         category: $category
-        pageSize: 100
+        pageSize: "100"
       ) {
         articles {
           author
@@ -35,7 +35,7 @@ const fetchNews = async (
 
   // fetch function with Next js 13 caching
   const res = await fetch(
-    "https://malanville.stepzen.net/api/willing-wolf/__graphql",
+    "https://kelegerdus.us-east-a.ibm.stepzen.net/api/flash-news/__graphql",
     {
       method: "POST",
       cache: isDynamic ? "no-cache" : "default",
@@ -56,6 +56,7 @@ const fetchNews = async (
   );
 
   const newsResponse = await res.json();
+  console.log(newsResponse);
   // sort function of images
   // const news = sortNewsByImage(newsResponse.data.myQuery);
   // console.log(news);
