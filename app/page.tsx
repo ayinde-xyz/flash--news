@@ -1,7 +1,7 @@
-import React from "react";
+import React, { Suspense } from "react";
 import fetchNews from "../lib/fetchNews";
 
-import NewsList from "./NewsList";
+import NewsList from "../components/NewsList";
 // import NewsList from "./NewsList";
 
 // async function getData() {
@@ -16,12 +16,13 @@ async function Page() {
   // const news: any = response;
 
   const news: Root = await fetchNews("general", "");
-  console.log(news);
+  // console.log(news);
 
   return (
     <div>
       <NewsList articles={news.articles} />
     </div>
+
     // <div>
     //   <NewsList news={news} />
     // </div>

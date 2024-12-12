@@ -27,4 +27,15 @@ type Query {
     language: String
     pageSize: String
   ): Root @rest(endpoint: "https://newsapi.org/v2/top-headlines")
+  fetchSearchNews(
+    apiKey: String
+    from: String
+    language: String
+    page: String
+    pageSize: String
+    q: String
+    searchIn: String
+    sortBy: String
+    to: String
+  ): Root @rest(endpoint: "https://newsapi.org/v2/everything")
 }

@@ -1,14 +1,13 @@
 import React from "react";
 import fetchNews from "../../../lib/fetchNews";
-import NewsList from "../../NewsList";
-import { categories } from "../../../constants";
+import NewsList from "../../../components/NewsList";
 type Props = {
   params: { category: Category };
 };
 
 const NewsCategory = async ({ params: { category } }: Props) => {
-  const news: Root = await fetchNews(category);
-  console.log(news);
+  const news: Root = await fetchNews(category, undefined, false);
+  // console.log(news);
   return (
     <div>
       <h1 className="headerTitle">{category} - Top Headlines</h1>

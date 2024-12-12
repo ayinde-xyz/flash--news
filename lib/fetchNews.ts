@@ -38,7 +38,7 @@ const fetchNews = async (
     "https://kelegerdus.us-east-a.ibm.stepzen.net/api/flash-news/__graphql",
     {
       method: "POST",
-      cache: isDynamic ? "no-cache" : "default",
+      // cache: isDynamic ? "no-cache" : "default",
       next: isDynamic ? { revalidate: 0 } : { revalidate: 30 },
       headers: {
         "Content-Type": "application/json",
@@ -56,7 +56,7 @@ const fetchNews = async (
   );
 
   const newsResponse = await res.json();
-  console.log(newsResponse);
+  // console.log(newsResponse);
   // sort function of images
   // const news = sortNewsByImage(newsResponse.data.myQuery);
   // console.log(news);
