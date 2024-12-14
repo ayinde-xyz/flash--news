@@ -56,8 +56,8 @@ const fetchSearchNews = async (
     "https://kelegerdus.us-east-a.ibm.stepzen.net/api/flash-news/__graphql",
     {
       method: "POST",
-      cache: isDynamic ? "no-store" : "default",
-      // next: isDynamic ? { revalidate: 0 } : { revalidate: 30 },
+      // cache: isDynamic ? "force-cache" : "no-store",
+      next: isDynamic ? { revalidate: 0 } : { revalidate: 30 },
       headers: {
         "Content-Type": "application/json",
         Authorization: `APIkey ${process.env.STEPZEN_API_KEY}`,

@@ -6,7 +6,9 @@ export const SearchSchema = z.object({
   sortBy: z.enum(["relevancy", "popularity", "publishedAt"]),
   dateRange: z
     .object({
-      from: z.date({ required_error: "Please select a start date" }),
+      from: z
+        .date({ required_error: "Please select a start date" })
+        .max(new Date(), { message: "Start date must be before today" }),
       to: z.date({ required_error: "Please select an end date" }),
     })
     .refine((dateRange) => dateRange.from <= dateRange.to, {

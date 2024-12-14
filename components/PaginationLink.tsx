@@ -24,7 +24,7 @@ const PaginationLink = () => {
     } else {
       params.delete("page");
     }
-    push(`${pathname}?${params}&pageSize=20`, { scroll: false });
+    push(`${pathname}?${params}&pageSize=20`, { scroll: true });
   };
 
   return (

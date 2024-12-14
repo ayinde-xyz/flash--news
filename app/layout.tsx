@@ -10,14 +10,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning={true}>
       {/*
         <head /> will contain the components returned by the nearest parent
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       {/* <Suspense fallback={<div>Loading...</div>}> */}
       <Providers>
-        <body className="bg-gray-200 dark:bg-zinc-900 transition-all duration-700">
+        <body className="bg-gray-200 dark:bg-zinc-900 transition-all duration-700 scroll-smooth">
           <Header />
           <div className="mx-auto">{children}</div>
           {/* <Footer /> */}

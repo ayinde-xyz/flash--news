@@ -6,7 +6,7 @@ type Props = {
 };
 
 const NewsCategory = async ({ params: { category } }: Props) => {
-  const news: Root = await fetchNews(category, undefined, false);
+  const news: Root = await fetchNews(category, undefined, true);
   // console.log(news);
   return (
     <div>

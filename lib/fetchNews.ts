@@ -1,3 +1,4 @@
+"use server";
 import { gql } from "graphql-request";
 //import sortNewsByImage from "./sortNewsByImage";
 const fetchNews = async (
@@ -38,8 +39,8 @@ const fetchNews = async (
     "https://kelegerdus.us-east-a.ibm.stepzen.net/api/flash-news/__graphql",
     {
       method: "POST",
-      // cache: isDynamic ? "no-cache" : "default",
-      next: isDynamic ? { revalidate: 0 } : { revalidate: 30 },
+      // cache: isDynamic ? "force-cache" : "no-store",
+      next: isDynamic ? { revalidate: 60 } : { revalidate: 0 },
       headers: {
         "Content-Type": "application/json",
         Authorization: `APIkey ${process.env.STEPZEN_API_KEY}`,
