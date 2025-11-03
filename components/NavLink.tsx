@@ -18,7 +18,7 @@ const NavLink = ({ category, isActive }: Props) => {
       className={`md:gap-1.5 gap-0 ${
         category === "entertainment" && "col-span-2 md:col-span-1"
       }`}>
-      <BreadcrumbLink>
+      <BreadcrumbLink asChild>
         <Link
           href={`/news/${category}`}
           className={`navLink capitalize ${

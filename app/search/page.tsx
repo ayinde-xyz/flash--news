@@ -6,17 +6,18 @@ import PaginationLink from "@/components/PaginationLink";
 import { Suspense } from "react";
 
 type Props = {
-  searchParams?: {
+  searchParams?: Promise<{
     term: string;
     sortBy: string;
     from: DateRange["from"];
     to: DateRange["to"];
     pageSize: number;
     page: number;
-  };
+  }>;
 };
 
-const SearchPage = async ({ searchParams }: Props) => {
+const SearchPage = async (props: Props) => {
+  const searchParams = await props.searchParams;
   if (!searchParams) return null;
   const { term, sortBy, from, to, pageSize, page } = searchParams;
   const news: Root = await fetchSearchNews(

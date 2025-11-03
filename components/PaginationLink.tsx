@@ -8,23 +8,28 @@ import {
   PaginationPrevious,
 } from "./ui/pagination";
 import { usePathname, useSearchParams } from "next/navigation";
-import { Suspense, useState } from "react";
+import { Suspense } from "react";
 import { useRouter } from "next/navigation";
 
 const PaginationLink = () => {
-  const [page, setPage] = useState(1);
+  // Derive page from the route search params so the component always
+  // reflects the current URL. Keep pageSize=20 as default.
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { push } = useRouter();
-  const handleSearchParams = (pageNumber: string) => {
+  const pageParam = searchParams?.get("page");
+  const page = pageParam ? Math.max(1, parseInt(pageParam, 10) || 1) : 1;
+
+  const handleSearchParams = (pageNumber?: number) => {
     const params = new URLSearchParams(searchParams);
-    if (pageNumber) {
-      params.set("page", pageNumber);
-      params.delete("pageSize");
+    if (pageNumber && pageNumber > 0) {
+      params.set("page", String(pageNumber));
     } else {
       params.delete("page");
     }
-    push(`${pathname}?${params}&pageSize=20`, { scroll: true });
+    // Ensure pageSize is always set to 20
+    params.set("pageSize", "20");
+    push(`${pathname}?${params.toString()}`, { scroll: true });
   };
 
   return (
@@ -36,25 +41,28 @@ const PaginationLink = () => {
               <PaginationItem>
                 <PaginationPrevious
                   onClick={() => {
-                    setPage(page - 1);
-                    console.log(page);
-                    handleSearchParams((page - 1).toString());
+                    handleSearchParams(page - 1);
                   }}
                 />
               </PaginationItem>
             )}
 
             <PaginationItem>
-              <Link href={""}>{page}</Link>
+              <Link
+                href={`${pathname}?${new URLSearchParams({
+                  ...Object.fromEntries(searchParams ?? []),
+                  page: String(page),
+                  pageSize: "20",
+                }).toString()}`}>
+                {page}
+              </Link>
             </PaginationItem>
 
             {page < 5 && (
               <PaginationItem>
                 <PaginationNext
                   onClick={() => {
-                    setPage(page + 1);
-                    console.log(page);
-                    handleSearchParams((page + 1).toString());
+                    handleSearchParams(page + 1);
                   }}
                 />
               </PaginationItem>

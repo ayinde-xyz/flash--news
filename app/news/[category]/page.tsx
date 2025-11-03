@@ -2,10 +2,16 @@ import React from "react";
 import fetchNews from "../../../lib/fetchNews";
 import NewsList from "../../../components/NewsList";
 type Props = {
-  params: { category: Category };
+  params: Promise<{ category: Category }>;
 };
 
-const NewsCategory = async ({ params: { category } }: Props) => {
+const NewsCategory = async (props: Props) => {
+  const params = await props.params;
+
+  const {
+    category
+  } = params;
+
   const news: Root = await fetchNews(category, undefined, true);
   // console.log(news);
   return (

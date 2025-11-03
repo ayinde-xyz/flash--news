@@ -16,13 +16,15 @@ export default function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       {/* <Suspense fallback={<div>Loading...</div>}> */}
-      <Providers>
-        <body className="bg-gray-200 dark:bg-zinc-900 transition-all duration-700 scroll-smooth">
+
+      <body className="bg-gray-200 dark:bg-zinc-900 transition-all duration-700 scroll-smooth">
+        <Providers>
           <Header />
           <div className="mx-auto">{children}</div>
           {/* <Footer /> */}
-        </body>
-      </Providers>
+        </Providers>
+      </body>
+
       {/* </Suspense> */}
     </html>
   );

@@ -4,14 +4,14 @@ import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
 import { SunIcon, MoonIcon } from "@heroicons/react/24/solid";
 const DarkModeButton = () => {
-  const [mounted, setMounted] = useState(false);
+  // const [mounted, setMounted] = useState(false);
   const { systemTheme, theme, setTheme } = useTheme();
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-  if (!mounted) {
-    return null;
-  }
+  // useEffect(() => {
+  //   setMounted(true);
+  // }, []);
+  // if (!mounted) {
+  //   return null;
+  // }
   const currentTheme = theme === "theme" ? systemTheme : theme;
   return (
     <div>

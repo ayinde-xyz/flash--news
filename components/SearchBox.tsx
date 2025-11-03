@@ -12,9 +12,9 @@ import { DateRange } from "react-day-picker";
 import { format, subDays } from "date-fns";
 import DateRangePicker from "./DateRangePicker";
 import SortBy from "./SortBy";
+import * as z from "zod";
 
 const SearchBox = () => {
-  const [input, setInput] = useState("");
   const searchParams = useSearchParams();
   const term = searchParams.get("term");
   const [isPending, startTransition] = useTransition();
@@ -23,7 +23,7 @@ const SearchBox = () => {
     to: new Date(),
   });
   const router = useRouter();
-  const form = useForm<SearchSchemaTypes>({
+  const form = useForm<z.infer<typeof SearchSchema>>({
     resolver: zodResolver(SearchSchema),
     defaultValues: {
       term: term || "",
@@ -58,7 +58,7 @@ const SearchBox = () => {
             <FormItem className="w-full">
               <FormControl>
                 <Input
-                  className="flex-1  rounded-sm placeholder-gray-500 text-gray-500 outline-none bg-transparent dark:text-orange-400"
+                  className="flex-1  rounded-sm placeholder-gray-500 text-gray-500 outline-hidden bg-transparent dark:text-orange-400"
                   {...field}
                   placeholder="Search Keywords...."
                   type="text"
@@ -102,7 +102,7 @@ export default SearchBox;
           value={input}
           onChange={(e) => setInput(e.target.value)}
           type="text"
-          className="flex-1 w-full rounded-sm placeholder-gray-500 text-gray-500 outline-none bg-transparent dark:text-orange-400"
+          className="flex-1 w-full rounded-sm placeholder-gray-500 text-gray-500 outline-hidden bg-transparent dark:text-orange-400"
         /> */
 }
 {
