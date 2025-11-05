@@ -28,7 +28,7 @@ const NavLink = ({ category, isActive }: Props) => {
           {category}
         </Link>
       </BreadcrumbLink>
-      <BreadcrumbSeparator className="md:block hidden" />
+      {/* <BreadcrumbSeparator className="md:block hidden" /> */}
     </BreadcrumbItem>
   );
 };

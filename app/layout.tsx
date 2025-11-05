@@ -21,7 +21,7 @@ export default function RootLayout({
         <Providers>
           <Header />
           <div className="mx-auto">{children}</div>
-          {/* <Footer /> */}
+          <Footer />
         </Providers>
       </body>
 

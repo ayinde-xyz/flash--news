@@ -12,7 +12,7 @@ const NavLinks = () => {
     return pathname?.split("/").pop() === path;
   };
   return (
-    <Breadcrumb className="text-xs md:text-sm  pb-10 max-w-6xl mx-auto border-b">
+    <Breadcrumb className="text-xs md:text-sm max-w-6xl mx-auto border-b">
       <BreadcrumbList className="grid grid-cols-4 md:grid-cols-7 md:gap-4 gap-x-0">
         <li className=" font-bold  text-center text-red-700">
           <span className="relative">

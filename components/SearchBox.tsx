@@ -13,6 +13,13 @@ import { format, subDays } from "date-fns";
 import DateRangePicker from "./DateRangePicker";
 import SortBy from "./SortBy";
 import * as z from "zod";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "./ui/accordion";
+import { Search } from "lucide-react";
 
 const SearchBox = () => {
   const searchParams = useSearchParams();
@@ -49,45 +56,108 @@ const SearchBox = () => {
     // <Suspense fallback={<div>Loading...</div>}>
     <Form {...form}>
       <form
-        className="max-w-6xl flex-col md:flex-row space-x-0 space-y-3 md:space-x-3 mt-4 mx-auto flex justify-between items-center"
+        className="max-w-6xl flex-col space-y-3 mt-4 mx-auto"
         onSubmit={form.handleSubmit(handleSearch)}>
-        <FormField
-          control={form.control}
-          name="term"
-          render={({ field }) => (
-            <FormItem className="w-full">
-              <FormControl>
-                <Input
-                  className="flex-1  rounded-sm placeholder-gray-500 text-gray-500 outline-hidden bg-transparent dark:text-orange-400"
-                  {...field}
-                  placeholder="Search Keywords...."
-                  type="text"
+        {/* Mobile View (Accordion) */}
+        <div className="lg:hidden">
+          <Accordion type="single" collapsible defaultValue="search">
+            <AccordionItem value="search">
+              <FormField
+                control={form.control}
+                name="term"
+                render={({ field }) => (
+                  <FormItem className="w-full flex space-x-2 ">
+                    <FormControl>
+                      <Input
+                        className="grow rounded-sm placeholder-gray-500 text-gray-500 outline-hidden bg-transparent dark:text-orange-400"
+                        {...field}
+                        placeholder="Search Keywords...."
+                        type="text"
+                      />
+                    </FormControl>
+
+                    <Button
+                      className="flex-none text-orange-400 disabled:text-gray-400"
+                      variant={"outline"}
+                      size={"icon"}
+                      type="submit"
+                      disabled={isPending}>
+                      <Search className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant={"outline"}
+                      size={"icon"}
+                      className="flex-none text-orange-400 ">
+                      <AccordionTrigger />
+                    </Button>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <AccordionContent>
+                <FormField
+                  control={form.control}
+                  name="sortBy"
+                  render={({ field }) => (
+                    <SortBy field={field} isPending={isPending} />
+                  )}
                 />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
 
-        <FormField
-          control={form.control}
-          name="sortBy"
-          render={({ field }) => <SortBy field={field} isPending={isPending} />}
-        />
+                <FormField
+                  control={form.control}
+                  name="dateRange"
+                  render={({ field }) => (
+                    <DateRangePicker
+                      field={field}
+                      date={date}
+                      setDate={setDate}
+                    />
+                  )}
+                />
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
 
-        <FormField
-          control={form.control}
-          name="dateRange"
-          render={({ field }) => (
-            <DateRangePicker field={field} date={date} setDate={setDate} />
-          )}
-        />
-        <Button
-          className="w-full text-orange-400 disabled:text-gray-400"
-          type="submit"
-          disabled={isPending}>
-          Search
-        </Button>
+        {/* Desktop View (No Accordion) */}
+        <div className="hidden lg:flex flex-col space-y-4">
+          <FormField
+            control={form.control}
+            name="term"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormControl>
+                  <Input
+                    className="flex-1 rounded-sm placeholder-gray-500 text-gray-500 outline-hidden bg-transparent dark:text-orange-400"
+                    {...field}
+                    placeholder="Search Keywords...."
+                    type="text"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <div className="flex space-x-4">
+            <FormField
+              control={form.control}
+              name="sortBy"
+              render={({ field }) => (
+                <SortBy field={field} isPending={isPending} />
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="dateRange"
+              render={({ field }) => (
+                <DateRangePicker field={field} date={date} setDate={setDate} />
+              )}
+            />
+          </div>
+        </div>
       </form>
     </Form>
     // </Suspense>
