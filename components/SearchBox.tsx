@@ -90,8 +90,6 @@ const SearchBox = () => {
                       className="flex-none text-orange-400 ">
                       <AccordionTrigger />
                     </Button>
-
-                    <FormMessage />
                   </FormItem>
                 )}
               />
