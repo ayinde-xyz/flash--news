@@ -22,10 +22,6 @@ async function Page() {
     <div>
       <NewsList articles={news.articles} />
     </div>
-
-    // <div>
-    //   <NewsList news={news} />
-    // </div>
   );
 }
 

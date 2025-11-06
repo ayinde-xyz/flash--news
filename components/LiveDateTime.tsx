@@ -19,7 +19,7 @@ const LiveDateTime = () => {
       {/* Mobile Format */}
 
       <span className="md:hidden">
-        {format(dateTime, "dd/MM/yy HH:mm")}
+        {/* {format(dateTime, "dd/MM/yy HH:mm")} */}
         {dateTime.toLocaleDateString("en-GB", {
           day: "2-digit",
           month: "2-digit",

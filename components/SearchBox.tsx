@@ -60,7 +60,7 @@ const SearchBox = () => {
         onSubmit={form.handleSubmit(handleSearch)}>
         {/* Mobile View (Accordion) */}
         <div className="lg:hidden">
-          <Accordion type="single" collapsible defaultValue="search">
+          <Accordion type="single" collapsible>
             <AccordionItem value="search">
               <FormField
                 control={form.control}
@@ -125,7 +125,7 @@ const SearchBox = () => {
             control={form.control}
             name="term"
             render={({ field }) => (
-              <FormItem className="w-full">
+              <FormItem className="w-full flex space-x-2">
                 <FormControl>
                   <Input
                     className="flex-1 rounded-sm placeholder-gray-500 text-gray-500 outline-hidden bg-transparent dark:text-orange-400"
@@ -134,7 +134,13 @@ const SearchBox = () => {
                     type="text"
                   />
                 </FormControl>
-                <FormMessage />
+                <Button
+                  className="flex-none bg-orange-400 disabled:text-gray-400"
+                  variant={"outline"}
+                  type="submit"
+                  disabled={isPending}>
+                  Search
+                </Button>
               </FormItem>
             )}
           />

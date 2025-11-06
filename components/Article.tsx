@@ -1,6 +1,7 @@
 import ReadMoreButton from "./ReadMoreButton";
 import LiveTimeStamp from "./LiveTimestamp";
-import DialogPreview from "./DialogPreview";
+
+import ArticleImage from "./ArticleImage";
 
 type Props = {
   article: ArticlesEntry;
@@ -10,16 +11,9 @@ const Article = ({ article }: Props) => {
   if (article.description !== "[Removed]")
     return (
       <article className="bg-slate-100 dark:bg-slate-800 flex flex-col rounded-lg shadow-xs hover:scale-105 hover:shadow-lg hover:bg-slate-200 transition-all duration-200 ease-out">
-        {article.urlToImage && (
-          <picture>
-            <img
-              src={article?.urlToImage}
-              alt={article?.title}
-              loading="eager"
-              className="h-56 w-full object-cover rounded-t-lg shadow-md"
-            />
-          </picture>
-        )}
+        <div className="relative">
+          <ArticleImage article={article} />
+        </div>
         <div className="flex-1 flex flex-col">
           {/* <DialogPreview article={article}> */}
           <div className="flex-1 flex flex-col p-5">
