@@ -12,9 +12,9 @@ const NavLinks = () => {
     return pathname?.split("/").pop() === path;
   };
   return (
-    <Breadcrumb className="text-xs md:text-sm max-w-6xl mx-auto border-b">
-      <BreadcrumbList className="grid grid-cols-4 md:grid-cols-7 md:gap-4 gap-x-0">
-        <li className=" font-bold  text-center text-red-700">
+    <Breadcrumb className="text-xs md:text-sm mx-auto border-b">
+      <BreadcrumbList className="flex overflow-x-auto scrollbar-hide whitespace-nowrap space-x-2 py-2">
+        <li className="font-bold text-center text-red-700 shrink-0">
           <span className="relative">
             <span className="absolute top-1.5 -left-2.5 flex size-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-700 opacity-75"></span>

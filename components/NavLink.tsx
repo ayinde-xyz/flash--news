@@ -15,7 +15,7 @@ type Props = {
 const NavLink = ({ category, isActive }: Props) => {
   return (
     <BreadcrumbItem
-      className={`md:gap-1.5 gap-0 ${
+      className={`md:gap-1.5 gap-0 shrink-0 ${
         category === "entertainment" && "col-span-2 md:col-span-1"
       }`}>
       <BreadcrumbLink asChild>

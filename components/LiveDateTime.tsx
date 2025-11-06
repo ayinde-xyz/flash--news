@@ -1,5 +1,6 @@
 "use client";
 
+import { format } from "date-fns";
 import { useEffect, useState } from "react";
 
 const LiveDateTime = () => {
@@ -12,11 +13,13 @@ const LiveDateTime = () => {
 
     return () => clearInterval(timer);
   }, []);
-
+  // console.log("Rendered LiveDateTime", dateTime);
   return (
     <div className="text-sm text-orange-400">
       {/* Mobile Format */}
+
       <span className="md:hidden">
+        {format(dateTime, "dd/MM/yy HH:mm")}
         {dateTime.toLocaleDateString("en-GB", {
           day: "2-digit",
           month: "2-digit",
