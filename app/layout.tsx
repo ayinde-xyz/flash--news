@@ -2,7 +2,9 @@ import "./globals.css";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Providers from "../components/Providers";
-import { Suspense } from "react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {};
 
 export default function RootLayout({
   children,
@@ -29,6 +31,8 @@ export default function RootLayout({
     </html>
   );
 }
+
+// genkit start -- tsc --watch actions/genkit/menuSuggestionFlow.ts --bun run dev
 
 // ↑ @types/node 22.10.1 → 24.9.2
 // ↑ @types/react 18.3.12 → 19.2.2

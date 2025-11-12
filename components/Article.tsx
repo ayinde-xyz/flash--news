@@ -2,6 +2,7 @@ import ReadMoreButton from "./ReadMoreButton";
 import LiveTimeStamp from "./LiveTimestamp";
 
 import ArticleImage from "./ArticleImage";
+import AIButton from "./AIButton";
 
 type Props = {
   article: ArticlesEntry;
@@ -21,13 +22,16 @@ const Article = ({ article }: Props) => {
             <section className="mt-2 flex-1">
               <p className="text-xs line-clamp-6">{article?.description}</p>
             </section>
-            <footer className="text-xs text-right ml-auto flex space-x-1 pt-5 italic text-gray-500">
-              <p>{article.source?.id} -</p>
-              <p>
-                {/* <Timeago date={article?.publishedAt} /> */}
-                <LiveTimeStamp time={article?.publishedAt} />
-              </p>
-            </footer>
+            <div className="text-xs text-right flex justify-between items-center space-x-1 pt-5 italic text-gray-500">
+              <AIButton article={article} />
+              <div className="ml-auto">
+                <span>{article.source?.id} -</span>{" "}
+                <span>
+                  {/* <Timeago date={article?.publishedAt} /> */}
+                  <LiveTimeStamp time={article?.publishedAt} />
+                </span>
+              </div>
+            </div>
           </div>
           {/* </DialogPreview> */}
 
