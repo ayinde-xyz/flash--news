@@ -17,7 +17,7 @@ export const genkitPrompt = async (article: string) => {
     },
     async ({ article }, { sendChunk }) => {
       const { stream, response } = ai.generateStream({
-        model: googleAI.model("gemini-2.5-pro"),
+        model: googleAI.model("gemini-2.5-flash"),
         prompt: `Summarize the text written in this ${article}`,
       });
 
