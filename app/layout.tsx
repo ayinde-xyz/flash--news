@@ -8,7 +8,14 @@ export const metadata: Metadata = {
   title: "Flash News - AI-Powered News Summarization",
   description:
     "Stay informed with Flash News, your go-to platform for AI-powered news summarization. Get concise and accurate summaries of the latest news articles, powered by cutting-edge AI technology.",
+
   authors: { name: "Ayinde AbdurRahman" },
+  openGraph: {
+    title: "Flash News - AI-Powered News Summarization",
+    description:
+      "Stay informed with Flash News, your go-to platform for AI-powered news summarization. Get concise and accurate summaries of the latest news articles, powered by cutting-edge AI technology.",
+    images: "/public/flashnewsmetadata.jpg",
+  },
   metadataBase: new URL(`https://${process.env.VERCEL_URL}`),
 };
 
