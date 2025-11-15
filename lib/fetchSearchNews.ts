@@ -1,5 +1,6 @@
 "use server";
 import { gql } from "graphql-request";
+import { revalidatePath, updateTag } from "next/cache";
 import { DateRange } from "react-day-picker";
 
 const fetchSearchNews = async (
@@ -51,13 +52,16 @@ const fetchSearchNews = async (
     }
   `;
 
-  // fetch function with Next js 15 caching
+  // fetch function with Next.js caching control
+  // Use `cache: "no-store"` so this call always fetches fresh data.
+  // When `isDynamic` is true we also trigger a revalidation of the
+  // `/search` path so any cached pages depending on this data are updated.
   const res = await fetch(
     "https://kelegerdus.us-east-a.ibm.stepzen.net/api/flash-news/__graphql",
     {
       method: "POST",
-      // cache: isDynamic ? "force-cache" : "no-store",
-      next: isDynamic ? { revalidate: 0 } : { revalidate: 30 },
+      cache: "no-cache",
+      next: { revalidate: 0 },
       headers: {
         "Content-Type": "application/json",
         Authorization: `APIkey ${process.env.STEPZEN_API_KEY}`,
@@ -78,7 +82,23 @@ const fetchSearchNews = async (
   );
 
   const newsResponse = await res.json();
-  // console.log(newsResponse.data.fetchSearchNews);
+
+  // Optionally revalidate the search page so any cached pages get updated.
+  // We only run this when the caller explicitly requests dynamic behavior.
+  // try {
+  //   if (isDynamic) {
+  //     // revalidate the search route which consumes this data
+  //     revalidatePath("/search");
+  //     updateTag("term");
+  //   }
+  // } catch (e) {
+  //   // revalidatePath is a best-effort operation; don't throw if it fails
+  //   // (for example in older Next.js versions or non-app-router contexts).
+  //   // eslint-disable-next-line no-console
+  //   console.warn("revalidatePath failed:", e);
+  // }
+
+  revalidatePath("/search");
 
   return newsResponse.data.fetchSearchNews;
 };

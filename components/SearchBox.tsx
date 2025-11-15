@@ -85,6 +85,7 @@ const SearchBox = () => {
                       <Search className="h-4 w-4" />
                     </Button>
                     <Button
+                      asChild
                       variant={"outline"}
                       size={"icon"}
                       className="flex-none text-orange-400 ">

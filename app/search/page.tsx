@@ -3,7 +3,6 @@ import NewsList from "../../components/NewsList";
 import { DateRange } from "react-day-picker";
 import Footer from "@/components/Footer";
 import PaginationLink from "@/components/PaginationLink";
-import { Suspense } from "react";
 
 type Props = {
   searchParams?: Promise<{
@@ -29,6 +28,16 @@ const SearchPage = async (props: Props) => {
     pageSize,
     page
   );
+
+  // const news: Root = await searchFetchNews(
+  //   term,
+  //   sortBy,
+  //   true,
+  //   from,
+  //   to,
+  //   pageSize,
+  //   page
+  // );
   // console.log(news);
   return (
     <div>
