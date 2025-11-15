@@ -1,7 +1,6 @@
 import fetchSearchNews from "../../lib/fetchSearchNews";
 import NewsList from "../../components/NewsList";
 import { DateRange } from "react-day-picker";
-import Footer from "@/components/Footer";
 import PaginationLink from "@/components/PaginationLink";
 
 type Props = {
@@ -18,6 +17,7 @@ type Props = {
 const SearchPage = async (props: Props) => {
   const searchParams = await props.searchParams;
   if (!searchParams) return null;
+
   const { term, sortBy, from, to, pageSize, page } = searchParams;
   const news: Root = await fetchSearchNews(
     term,
