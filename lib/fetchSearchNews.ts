@@ -60,7 +60,7 @@ const fetchSearchNews = async (
     "https://kelegerdus.us-east-a.ibm.stepzen.net/api/flash-news/__graphql",
     {
       method: "POST",
-      cache: "no-cache",
+      cache: "no-store",
       next: { revalidate: 0 },
       headers: {
         "Content-Type": "application/json",
@@ -97,8 +97,6 @@ const fetchSearchNews = async (
   //   // eslint-disable-next-line no-console
   //   console.warn("revalidatePath failed:", e);
   // }
-
-  revalidatePath("/search");
 
   return newsResponse.data.fetchSearchNews;
 };
