@@ -3,6 +3,8 @@ import NewsList from "../../components/NewsList";
 import { DateRange } from "react-day-picker";
 import PaginationLink from "@/components/PaginationLink";
 
+export const dynamic = "force-dynamic";
+
 type Props = {
   searchParams?: Promise<{
     term: string;
@@ -19,6 +21,7 @@ const SearchPage = async (props: Props) => {
   if (!searchParams) return null;
 
   const { term, sortBy, from, to, pageSize, page } = searchParams;
+
   const news: Root = await fetchSearchNews(
     term,
     sortBy,
@@ -29,16 +32,6 @@ const SearchPage = async (props: Props) => {
     page
   );
 
-  // const news: Root = await searchFetchNews(
-  //   term,
-  //   sortBy,
-  //   true,
-  //   from,
-  //   to,
-  //   pageSize,
-  //   page
-  // );
-  // console.log(news);
   return (
     <div>
       <h1 className="headerTitle">Search Results For: {term}</h1>

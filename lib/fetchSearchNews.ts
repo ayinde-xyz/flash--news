@@ -1,16 +1,16 @@
 "use server";
 import { gql } from "graphql-request";
-import { revalidatePath, updateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 import { DateRange } from "react-day-picker";
 
 const fetchSearchNews = async (
   keywords: string | null,
-  sortBy?: string,
+  sortBy?: string | null,
   isDynamic?: boolean,
-  from?: DateRange["from"],
-  to?: DateRange["to"],
-  pageSize?: number,
-  page?: number
+  from?: DateRange["from"] | null,
+  to?: DateRange["to"] | null,
+  pageSize?: number | null,
+  page?: number | null
 ) => {
   // Grapql query
   const query = gql`
@@ -52,10 +52,10 @@ const fetchSearchNews = async (
     }
   `;
 
-  // fetch function with Next.js caching control
-  // Use `cache: "no-store"` so this call always fetches fresh data.
-  // When `isDynamic` is true we also trigger a revalidation of the
-  // `/search` path so any cached pages depending on this data are updated.
+  // Force fetch to always get fresh data on the server:
+  // - Next.js fetch option `cache: "no-store"` ensures no caching by Next
+  // - `next: { revalidate: 0 }` explicitly disables ISR for this request
+  // - HTTP headers ensure intermediary caches (CDNs/proxies) don't cache
   const res = await fetch(
     "https://kelegerdus.us-east-a.ibm.stepzen.net/api/flash-news/__graphql",
     {
@@ -82,21 +82,6 @@ const fetchSearchNews = async (
   );
 
   const newsResponse = await res.json();
-
-  // Optionally revalidate the search page so any cached pages get updated.
-  // We only run this when the caller explicitly requests dynamic behavior.
-  // try {
-  //   if (isDynamic) {
-  //     // revalidate the search route which consumes this data
-  //     revalidatePath("/search");
-  //     updateTag("term");
-  //   }
-  // } catch (e) {
-  //   // revalidatePath is a best-effort operation; don't throw if it fails
-  //   // (for example in older Next.js versions or non-app-router contexts).
-  //   // eslint-disable-next-line no-console
-  //   console.warn("revalidatePath failed:", e);
-  // }
 
   return newsResponse.data.fetchSearchNews;
 };

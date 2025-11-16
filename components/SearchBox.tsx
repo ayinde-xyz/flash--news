@@ -4,7 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form";
+import { Form, FormControl, FormField, FormItem } from "./ui/form";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 
@@ -42,6 +42,7 @@ const SearchBox = () => {
     },
   });
   const handleSearch = (values: SearchSchemaTypes) => {
+    router.refresh();
     startTransition(() => {
       router.push(
         `/search/?term=${values.term}&sortBy=${values.sortBy}&from=${format(
@@ -49,7 +50,6 @@ const SearchBox = () => {
           "yyyy-MM-dd"
         )}&to=${format(values.dateRange.to, "yyyy-MM-dd")}&pageSize=20&page=1`
       );
-      router.refresh();
     });
   };
   return (

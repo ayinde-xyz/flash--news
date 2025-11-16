@@ -1,4 +1,3 @@
-import React, { Suspense } from "react";
 import fetchNews from "../lib/fetchNews";
 
 import NewsList from "../components/NewsList";
