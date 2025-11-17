@@ -1,24 +1,41 @@
 import React, { Suspense } from "react";
-import { Bars3Icon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import NavLinks from "./NavLinks";
 import SearchBox from "./SearchBox";
 import DarkModeButton from "./DarkModeButton";
 import LiveDateTime from "./LiveDateTime";
+import { Oswald } from "next/font/google";
+import Image from "next/image";
+import Lightning from "../public/lightning.svg";
+
+const oswald = Oswald({
+  subsets: ["cyrillic"],
+  fallback: ["system-ui"],
+});
 
 const Header = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <header className="px-5 md:px-10">
         <div className="py-10 px-6 items-center ">
-          <Link href="/" prefetch={false}>
-            <h1 className="font-serif md:text-4xl text-center text-xl whitespace-nowrap">
+          <Link className={`${oswald.className}`} href="/" prefetch={false}>
+            <h1 className="md:text-4xl text-center text-xl whitespace-nowrap">
               The{" "}
               <span className="underline decoration-4 decoration-orange-400">
                 Flash
               </span>{" "}
               News
+              <Image
+                src={Lightning}
+                alt="Logo"
+                width={40}
+                height={40}
+                className="inline-block ml-2 mb-1"
+              />
             </h1>
+            <p className="text-center text-sm md:text-xl">
+              Summarize the latest news easily with Gemini
+            </p>
           </Link>
           <div className="flex items-center space-x-4 justify-end absolute top-8 right-0">
             {/* Dark Mode Button */}
